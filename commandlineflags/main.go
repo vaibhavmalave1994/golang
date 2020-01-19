@@ -8,7 +8,7 @@ import (
 
 func main() {
 
-	fmt.Println("Program Started")
+	fmt.Println("Program Started here")
 	flag1 := flag.String("name", "self", "name of the person")
 	flag.Parse()
 	fmt.Println(*flag1)

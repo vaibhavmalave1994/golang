@@ -1,6 +1,4 @@
-package main
-
-import "fmt"
+package adapter
 
 type charger interface {
 	UseIPhoneCharger()
@@ -9,42 +7,42 @@ type charger interface {
 type AndroidPhone struct {
 }
 
-func (a *AndroidPhone) UseMicroUsbCharger() {
-	fmt.Println("Charging with micro USB")
+func (a *AndroidPhone) UseMicroUsbCharger() string {
+	return "Charging with micro USB"
 }
 
 type IPhone struct {
 }
 
-func (a *IPhone) UseIPhoneCharger() {
-	fmt.Println("Charging with IPhone charger")
+func (a *IPhone) UseIPhoneCharger() string {
+	return "Charging with IPhone charger"
 }
 
 type AndroidChargerAdapter struct {
 	AndroidPhone *AndroidPhone
 }
 
-func (androidp *AndroidChargerAdapter) UseIPhoneCharger() {
-	androidp.AndroidPhone.UseMicroUsbCharger()
+func (androidp *AndroidChargerAdapter) UseIPhoneCharger() string {
+	return androidp.AndroidPhone.UseMicroUsbCharger()
 }
 
 type Client struct {
 }
 
-func (c *Client) InsertIphoneCharger(char charger) {
-	char.UseIPhoneCharger()
+func (c *Client) InsertIphoneCharger(char charger) string {
+	return char.UseIPhoneCharger()
 }
 
-func main() {
-	android := &AndroidPhone{}
-	android.UseMicroUsbCharger()
+// func main() {
+// 	android := &AndroidPhone{}
+// 	android.UseMicroUsbCharger()
 
-	iphone := &IPhone{}
-	iphone.UseIPhoneCharger()
+// 	iphone := &IPhone{}
+// 	iphone.UseIPhoneCharger()
 
-	androidNew := &AndroidChargerAdapter{android}
-	androidNew.UseIPhoneCharger()
-	client := &Client{}
-	client.InsertIphoneCharger(androidNew)
-	client.InsertIphoneCharger(iphone)
-}
+// 	androidNew := &AndroidChargerAdapter{android}
+// 	androidNew.UseIPhoneCharger()
+// 	client := &Client{}
+// 	client.InsertIphoneCharger(androidNew)
+// 	client.InsertIphoneCharger(iphone)
+// }
